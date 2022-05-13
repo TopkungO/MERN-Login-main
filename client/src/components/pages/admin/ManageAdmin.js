@@ -10,7 +10,7 @@ import {
   changeStatus,
   changeRole,
   removeUser,
-  resetPassword
+  resetPassword,
 } from "../../functions/users";
 
 const ManageAdmin = () => {
@@ -22,6 +22,11 @@ const ManageAdmin = () => {
     password: "",
   });
 
+  //ช่อมูลที่เลือก
+  const [selectData, setSeleteData] = useState([]);
+  //ข้อมูล loop dropdown
+  const [drop,setDrop]=useState([])
+
   const showModal = (id) => {
     setIsModalVisible(true);
     setValues({ ...values, id: id });
@@ -32,21 +37,20 @@ const ManageAdmin = () => {
 
   const handleOk = () => {
     setIsModalVisible(false);
-    resetPassword(user.token,values.id,{values})
-    .then(res=>{
-      console.log(res)
-      loadData(user.token);
-    }).catch(err=>{
-      console.log(err.response)
-    })
-
+    resetPassword(user.token, values.id, { values })
+      .then((res) => {
+        console.log(res);
+        loadData(user.token);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
   };
 
-  console.log("data", data);
   useEffect(() => {
     //code
     loadData(user.token);
@@ -58,6 +62,11 @@ const ManageAdmin = () => {
       .then((res) => {
         //code
         setData(res.data);
+        setSeleteData(res.data);
+        // [...new set(array)]
+        const dataDrop =[...new Set(res.data.map(item=>item.role))] 
+
+        setDrop(dataDrop);
       })
       .catch((err) => {
         //err
@@ -107,6 +116,20 @@ const ManageAdmin = () => {
     }
   };
   const roleData = ["admin", "user"];
+
+  const handleSeleteRole = (e)=>{
+    const value =e.target.value
+    if(value === 'all'){
+      setSeleteData(data)
+    }else{
+      const filterData =data.filter(item=>{
+        return item.role === value
+      })
+
+      setSeleteData(filterData);
+
+    }
+  }
   return (
     <div className="container-fluid">
       <div className="row">
@@ -116,6 +139,14 @@ const ManageAdmin = () => {
 
         <div className="col">
           <h1>ManageAdmin Page</h1>
+
+
+        
+          <select onChange={handleSeleteRole}>
+            <option value="all">all</option>
+            {drop.map((item,index)=><option value={item} key={index}>{item}</option>)}
+          </select>
+
           <table class="table">
             <thead>
               <tr>
@@ -128,7 +159,7 @@ const ManageAdmin = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, index) => (
+              {selectData.map((item, index) => (
                 <tr>
                   <th scope="row">{item.username}</th>
                   <td>
@@ -139,7 +170,7 @@ const ManageAdmin = () => {
                     >
                       {roleData.map((item, index) => (
                         <Select.Option value={item} key={index}>
-                          {item == "admin" ? (
+                          {item === "admin" ? (
                             <Tag color="green">{item}</Tag>
                           ) : (
                             <Tag color="red">{item}</Tag>

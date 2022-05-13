@@ -54,3 +54,18 @@ exports.update = async (req, res) => {
         res.status(500).send("Update Product Error!!")
     }
 };
+
+exports.listBy= async (req, res) => {
+    try{
+        const {sort,order,limit} =req.body;
+
+        const product = await Product.find()
+            .limit(limit)   //กำหนดข้อมูล
+            .populate('category')  //เชื่อมtable
+            .sort([[sort,order]]) 
+            //จัดลำดับข้อมูล
+        res.send(product)
+    }catch(err){
+        res.status(500).send("ListBy Product Faile!!")
+    }
+};

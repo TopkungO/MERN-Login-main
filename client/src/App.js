@@ -17,8 +17,10 @@ import CreateCategory from "./components/pages/admin/category/CreateCategory";
 import UpdateCategory from "./components/pages/admin/category/UpdateCategory";
 import CreateProduct from "./components/pages/admin/product/CreateProduct";
 import UpdateProduct from "./components/pages/admin/product/UpdateProduct";
+
 // pages user
 import HomeUser from "./components/pages/user/Home";
+import Product from "./components/pages/Product"
 // functions
 import { currentUser } from "./components/functions/auth";
 // redux
@@ -62,6 +64,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/product/:id" element={<Product />} />
 
         <Route
           path="/admin/index"

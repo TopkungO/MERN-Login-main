@@ -48,6 +48,7 @@ const CreateProduct = () => {
       .then((res) => {
         toast.success("insert data: " + res.data.title);
         console.log(res);
+        window.location.reload()
       })
       .catch((err) => {
         toast.error(err.response.data);

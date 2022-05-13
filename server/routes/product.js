@@ -2,7 +2,7 @@ const express =require('express')
 const router = express.Router()
 
 //controller
-const {create,remove,list,read,update} = require("../controllers/product")
+const {create,remove,list,read,update,listBy} = require("../controllers/product")
 //middleware 
 const{ auth ,adminCheck} =require('../middleware/auth')
 
@@ -19,6 +19,9 @@ router.delete("/product/:id",auth ,adminCheck,remove)
 //@method   get
 router.get("/products/:id",read)
 router.put("/products/:id",auth ,adminCheck,update)
+
+
+router.post("/productsby",listBy)
 
 
 
