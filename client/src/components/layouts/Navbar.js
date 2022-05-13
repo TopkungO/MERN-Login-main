@@ -5,7 +5,8 @@ import {
   UserAddOutlined,
   LoginOutlined,
   LogoutOutlined,
-  DownOutlined
+  DownOutlined,
+  ShopOutlined
 } from "@ant-design/icons";
 
 // Router
@@ -30,8 +31,10 @@ const Navbar = () => {
   return (
     <Menu mode="horizontal">
       <Menu.Item key="home" icon={<HomeOutlined />}>
-        {/* <a href="" ></a>*/}
         <Link to="/">Home</Link>
+      </Menu.Item>
+      <Menu.Item key="shop" icon={<ShopOutlined />}>
+        <Link to="/shop">Shop</Link>
       </Menu.Item>
 
       {user && (

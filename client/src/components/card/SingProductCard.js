@@ -1,17 +1,38 @@
 import React from "react";
 
-import { Card } from "antd";
+import { Card, Tabs } from "antd";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
+
+const { TabPane } = Tabs;
 const { Meta } = Card;
 
 const SingProductCard = ({ product }) => {
-  const { _id, title, description, images, price, quantity, sold } = product;
+  const { _id, title, description, images, price, quantity, sold, category } =
+    product;
+
   return (
     <>
-      <div className="col-md-7">image</div>
+      <div className="col-md-7">
+        <Carousel autoPlay showArrows={true} infiniteLoop>
+          {images &&
+            images.map((item) => <img src={item.url} key={item.public_id} />)}
+        </Carousel>
+
+        <Tabs>
+          <TabPane tab="Description" key="1">
+            {description}
+          </TabPane>
+          <TabPane tab="More..." key="2">
+            More...
+          </TabPane>
+        </Tabs>
+      </div>
       <div className="col-md-5">
+        <h1 className="bg-info p-3">{title}</h1>
         <Card
           actions={[
             <Link to={"/"}>
@@ -26,10 +47,23 @@ const SingProductCard = ({ product }) => {
             </>,
           ]}
         >
-          <Meta title={title} description={description} />
-          <p>
-              detail
-          </p>
+          <ul className="list-group list-group-flush">
+            {category && (
+              <li className="list-group-item">
+                category <span className="float-end">{category.name}</span>
+              </li>
+            )}
+
+            <li className="list-group-item">
+              Price <span className="float-end">{price}</span>
+            </li>
+            <li className="list-group-item">
+              quantity <span className="float-end">{quantity}</span>
+            </li>
+            <li className="list-group-item">
+              Sold <span className="float-end">{sold}</span>
+            </li>
+          </ul>
         </Card>
       </div>
     </>

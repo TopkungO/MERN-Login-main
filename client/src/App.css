@@ -2,6 +2,10 @@
 
 *{
     font-family: 'Mali', cursive;
-    
+}
+
+.slider img{
+    height: 450px;
+    object-fit: cover;
 }
 
