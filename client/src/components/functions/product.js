@@ -34,3 +34,6 @@ export const listProductBy = async (sort, order, limit) =>
     order,
     limit,
   });
+
+export const searchFilter = async (arg) =>
+  await axios.post(process.env.REACT_APP_API + "/search/filters",arg);

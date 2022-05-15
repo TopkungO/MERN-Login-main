@@ -7,7 +7,7 @@ const{ auth ,adminCheck} =require('../middleware/auth')
 
 //@Endpoint http://localhost:5000/api/category
 //@method   GET
-router.get("/category",auth ,adminCheck,listCategory)
+router.get("/category",listCategory)
 //@method   POST
 router.post("/category",auth ,adminCheck,createCategory)
 //@method   GET

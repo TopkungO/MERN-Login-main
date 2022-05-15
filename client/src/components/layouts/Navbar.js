@@ -6,12 +6,13 @@ import {
   LoginOutlined,
   LogoutOutlined,
   DownOutlined,
-  ShopOutlined
+  ShopOutlined,
 } from "@ant-design/icons";
 
 // Router
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Search from "../card/Search";
 
 const Navbar = () => {
   const { SubMenu } = Menu;
@@ -19,7 +20,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => ({ ...state }));
-  
 
   const logout = () => {
     dispatch({
@@ -46,12 +46,13 @@ const Navbar = () => {
             icon={<DownOutlined />}
             title={user.username}
           >
-            <Menu.Item 
-            icon={<LogoutOutlined />}
-            key="setting:1" onClick={logout}>
+            <Menu.Item
+              icon={<LogoutOutlined />}
+              key="setting:1"
+              onClick={logout}
+            >
               Logout
             </Menu.Item>
-
           </SubMenu>
         </>
       )}
@@ -76,6 +77,9 @@ const Navbar = () => {
           </Menu.Item>
         </>
       )}
+      <span className="p-1" style={{ float: "right" }}>
+        <Search />
+      </span>
     </Menu>
   );
 };
