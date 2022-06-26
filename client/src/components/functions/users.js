@@ -39,3 +39,15 @@ export const resetPassword = async (authtoken, id, values) => {
     },
   });
 };
+
+export const userCart = async (authtoken, cart) => {
+  return await axios.post(
+    process.env.REACT_APP_API + "/user/cart",
+    { cart },
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
+};

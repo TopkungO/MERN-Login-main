@@ -22,6 +22,10 @@ import UpdateProduct from "./components/pages/admin/product/UpdateProduct";
 import HomeUser from "./components/pages/user/Home";
 import Product from "./components/pages/Product"
 import Shop from "./components/pages/Shop"
+import Cart from "./components/pages/Cart";
+import CheckOut from "./components/pages/CheckOut";
+
+
 // functions
 import { currentUser } from "./components/functions/auth";
 // redux
@@ -30,6 +34,9 @@ import { useDispatch } from "react-redux";
 // Routes
 import UserRoute from "./components/routes/UserRoute";
 import AdminRoute from "./components/routes/AdminRoute";
+
+//drawer
+import SideDreawer from "./components/drawer/SideDreawer";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -61,12 +68,17 @@ function App() {
     <div className="App">
       <ToastContainer />
       <Navbar />
+      <SideDreawer/>
+
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/cart" element={<Cart />} />
+
 
         <Route
           path="/admin/index"
@@ -127,6 +139,16 @@ function App() {
             </UserRoute>
           }
         />
+
+        <Route
+          path="/checkout"
+          element={
+            <UserRoute>
+              <CheckOut />
+            </UserRoute>
+          }
+        />
+
       </Routes>
     </div>
   );

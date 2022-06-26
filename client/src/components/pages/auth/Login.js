@@ -6,13 +6,16 @@ import { login } from "../../functions/auth";
 
 // redux
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-import { Spin } from 'antd';
+import { Spin } from "antd";
 import { toast } from "react-toastify";
+
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+
   // let history = useHistory();
   const [value, setValue] = useState({
     username: "",
@@ -21,11 +24,16 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const roleBaseRedirect = (role) => {
-    console.log(role);
-    if (role === "admin") {
-      navigate("/admin/index");
+    let intended = location.state;
+
+    if (intended) {
+      navigate("../"+intended);
     } else {
-      navigate("/user/index");
+      if (role === "admin") {
+        navigate("/admin/index");
+      } else {
+        navigate("/user/index");
+      }
     }
   };
 
@@ -39,7 +47,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     setLoading(true);
     e.preventDefault();
-    console.log(value);
+    
     //code
     login(value)
       .then((res) => {
@@ -69,10 +77,14 @@ const Login = () => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          {loading 
-          ? <h1>Loading ...<Spin /></h1> 
-          : <h1>Login Page</h1>
-          }
+          {loading ? (
+            <h1>
+              Loading ...
+              <Spin />
+            </h1>
+          ) : (
+            <h1>Login Page</h1>
+          )}
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">

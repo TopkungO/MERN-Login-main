@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu } from "antd";
+import { Menu,Badge } from "antd";
 import {
   HomeOutlined,
   UserAddOutlined,
@@ -7,6 +7,7 @@ import {
   LogoutOutlined,
   DownOutlined,
   ShopOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 
 // Router
@@ -19,7 +20,7 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user,cart } = useSelector((state) => ({ ...state }));
 
   const logout = () => {
     dispatch({
@@ -35,6 +36,16 @@ const Navbar = () => {
       </Menu.Item>
       <Menu.Item key="shop" icon={<ShopOutlined />}>
         <Link to="/shop">Shop</Link>
+      </Menu.Item>
+
+
+      <Menu.Item key="cart" icon={<ShoppingCartOutlined />}>
+        <Link to="/cart">
+          <Badge count={cart.length} offset={[10,0]}>
+            Cart
+          </Badge>
+          
+          </Link>
       </Menu.Item>
 
       {user && (

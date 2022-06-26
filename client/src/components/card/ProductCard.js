@@ -3,12 +3,43 @@ import React from "react";
 import { Card } from "antd";
 import { EyeOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+import {useSelector, useDispatch} from 'react-redux' 
 
+
+//lodash
+import _ from 'lodash'
 
 const { Meta } = Card;
 
 const ProductCard = ({product}) => {
+
+  const dispatch = useDispatch()
+
   const {_id,title, description, images } = product;
+
+  const handleAddToCart =()=>{
+    let cart = []
+    if(localStorage.getItem('cart')){
+      cart =JSON.parse(localStorage.getItem('cart'))
+
+    }
+    cart.push({
+      ...product,
+      count:1
+    })
+    
+    let unique = _.uniqWith(cart, _.isEqual) 
+    localStorage.setItem('cart',JSON.stringify(unique))
+
+    dispatch({
+      type:"ADD_TO_CART",
+      payload:unique
+    })
+    dispatch({
+      type:"SET_VISIBLE",
+      payload:true
+    })
+  }
 
   return (
     <Card
@@ -31,7 +62,7 @@ const ProductCard = ({product}) => {
         ,
         <ShoppingCartOutlined 
           className="text-danger" 
-        //   onClick={()=>handleRemove(_id)}
+          onClick={handleAddToCart}
         />
       ]}
     >

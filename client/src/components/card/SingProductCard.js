@@ -7,13 +7,44 @@ import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 
+
+import {useSelector, useDispatch} from 'react-redux' 
+//lodash
+import _ from 'lodash'
+
 const { TabPane } = Tabs;
 const { Meta } = Card;
 
 const SingProductCard = ({ product }) => {
-  const { _id, title, description, images, price, quantity, sold, category } =
-    product;
+  const { _id, title, description, images, price, quantity, sold, category } = product;
 
+  const dispatch = useDispatch()
+
+  const handleAddToCart =()=>{
+    let cart = []
+    if(localStorage.getItem('cart')){
+      cart =JSON.parse(localStorage.getItem('cart'))
+  
+    }
+    cart.push({
+      ...product,
+      count:1
+    })
+      
+    let unique = _.uniqWith(cart, _.isEqual) 
+    localStorage.setItem('cart',JSON.stringify(unique))
+
+    dispatch({
+      type:"ADD_TO_CART",
+      payload:unique
+    })
+    
+    dispatch({
+      type:"SET_VISIBLE",
+      payload:true
+    })
+
+    }
   return (
     <>
       <div className="col-md-7">
@@ -41,7 +72,7 @@ const SingProductCard = ({ product }) => {
               Add to wishlist
             </Link>,
             <>
-              <ShoppingCartOutlined className="text-danger" />
+              <ShoppingCartOutlined className="text-danger" onClick={handleAddToCart}/>
               <br />
               Add to Cart
             </>,
