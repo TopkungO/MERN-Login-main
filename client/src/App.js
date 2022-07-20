@@ -17,14 +17,14 @@ import CreateCategory from "./components/pages/admin/category/CreateCategory";
 import UpdateCategory from "./components/pages/admin/category/UpdateCategory";
 import CreateProduct from "./components/pages/admin/product/CreateProduct";
 import UpdateProduct from "./components/pages/admin/product/UpdateProduct";
-
+import History from "./components/pages/user/History";
 // pages user
 import HomeUser from "./components/pages/user/Home";
 import Product from "./components/pages/Product"
 import Shop from "./components/pages/Shop"
 import Cart from "./components/pages/Cart";
 import CheckOut from "./components/pages/CheckOut";
-
+import Wishlist from "./components/pages/user/WishList";
 
 // functions
 import { currentUser } from "./components/functions/auth";
@@ -72,6 +72,7 @@ function App() {
 
 
       <Routes>
+        {/* local */}
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
@@ -79,7 +80,7 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/cart" element={<Cart />} />
 
-
+        {/* private  ต้องlogin admin*/}
         <Route
           path="/admin/index"
           element={
@@ -131,6 +132,7 @@ function App() {
           }
         />
 
+        {/*  private  ต้องlogin user */}
         <Route
           path="/user/index"
           element={
@@ -145,6 +147,24 @@ function App() {
           element={
             <UserRoute>
               <CheckOut />
+            </UserRoute>
+          }
+        />
+
+        <Route
+          path="/user/wishlist"
+          element={
+            <UserRoute>
+              <Wishlist />
+            </UserRoute>
+          }
+        />
+        
+        <Route
+          path="/user/history"
+          element={
+            <UserRoute>
+              <History />
             </UserRoute>
           }
         />

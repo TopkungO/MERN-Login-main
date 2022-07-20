@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu,Badge } from "antd";
+import { Menu, Badge } from "antd";
 import {
   HomeOutlined,
   UserAddOutlined,
@@ -20,8 +20,7 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user,cart } = useSelector((state) => ({ ...state }));
-
+  const { user, cart } = useSelector((state) => ({ ...state }));
   const logout = () => {
     dispatch({
       type: "LOGOUT",
@@ -38,14 +37,12 @@ const Navbar = () => {
         <Link to="/shop">Shop</Link>
       </Menu.Item>
 
-
       <Menu.Item key="cart" icon={<ShoppingCartOutlined />}>
         <Link to="/cart">
-          <Badge count={cart.length} offset={[10,0]}>
+          <Badge count={cart.length} offset={[10, 0]}>
             Cart
           </Badge>
-          
-          </Link>
+        </Link>
       </Menu.Item>
 
       {user && (
@@ -57,6 +54,23 @@ const Navbar = () => {
             icon={<DownOutlined />}
             title={user.username}
           >
+            <Menu.Item
+              // icon={<LogoutOutlined />}
+              key="setting:2"
+              // onClick={logout}
+            >
+              <Link to={"/user/index"}>Dasboaed</Link>
+            </Menu.Item>
+
+            {user.role === "admin" ? (
+              <Menu.Item
+                // icon={<LogoutOutlined />}
+                key="setting:3"
+                // onClick={logout}
+              >
+                <Link to={"/admin/index"}>DasboaedAdmin</Link>
+              </Menu.Item>
+            ) : null}
             <Menu.Item
               icon={<LogoutOutlined />}
               key="setting:1"

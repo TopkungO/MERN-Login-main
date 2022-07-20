@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import ProductCart from "../card/ProductCard";
 //function
 import { listProduct, searchFilter } from "../functions/product";
@@ -8,7 +8,7 @@ import { listCategory } from "../functions/category";
 import { Slider, Checkbox } from "antd";
 
 const Shop = () => {
-  const dispatch = useDispatch();
+
   const { search } = useSelector((state) => ({ ...state }));
   const { text } = search;
 

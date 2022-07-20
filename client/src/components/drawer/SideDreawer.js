@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { Button, Drawer } from "antd";
+import { Drawer } from "antd";
 
 const SideDreawer = () => {
   const dispatch = useDispatch();
@@ -28,6 +28,7 @@ const SideDreawer = () => {
             <img
               src={item.images[0].url}
               style={{ width: "100%", height: "100px", ObjectFit: "cover" }}
+              alt="รูป"
             />
             <p className="text-center bg-secondary text-light">
               {item.title} X {item.count}

@@ -13,6 +13,7 @@ exports.listCategory = async (req, res) => {
 exports.createCategory = async (req, res) => {
   try {
     const { name } = req.body;
+    console.log(name);
     const category = await new Category({ name }).save();
     res.send(category);
   } catch (err) {

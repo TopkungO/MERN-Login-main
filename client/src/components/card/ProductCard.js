@@ -3,7 +3,7 @@ import React from "react";
 import { Card } from "antd";
 import { EyeOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
-import {useSelector, useDispatch} from 'react-redux' 
+import { useDispatch} from 'react-redux' 
 
 
 //lodash

@@ -45,8 +45,8 @@ const ProductTableInCart = ({item}) => {
       cart = JSON.parse(localStorage.getItem('cart')) 
 
     }
-
-    cart.map((product,i)=>{
+ 
+    cart.map( (product,i) => {
       if(product._id === item._id){
         cart.splice(i,1)
       }
@@ -61,7 +61,7 @@ const ProductTableInCart = ({item}) => {
   return (
     <tbody>
         <tr>
-            <td><img src={item.images[0].url} width='100'/></td>
+            <td><img src={item.images[0].url} width='100'alt=""/></td>
             <td>{item.title}</td>
             <td>{item.price}</td>
             <td>

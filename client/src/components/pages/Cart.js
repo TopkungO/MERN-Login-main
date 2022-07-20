@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import { Link } from "react-router-dom";
 import ProductTableInCart from "../card/ProductTableInCart";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 //function
 import { userCart } from "../functions/users";
 const Cart = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { cart, user } = useSelector((state) => ({ ...state }));
 
