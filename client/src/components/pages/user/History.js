@@ -5,27 +5,10 @@ import MenubarUser from "../../layouts/MenubarUser";
 import { getOrder } from "../../functions/users";
 
 //pdf
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  PDFDownloadLink,
-} from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
-// Create styles
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: "row",
-    backgroundColor: "#E4E4E4",
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
-  },
-});
+import Invoice from "../../order/Invoice";
+import InvoicePDFJS from "../../order/InvoicePDFJS";
 const History = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const [orders, setOrders] = useState([]);
@@ -55,7 +38,7 @@ const History = () => {
               console.log(item);
               return (
                 <div className="card m-3" key={index}>
-                  <p>order{" " + item.orderstatus}</p>
+                  <p>status: {" " + item.orderStatus}</p>
                   {/*table*/}
                   <table className="table table-bordered">
                     <thead>
@@ -89,21 +72,11 @@ const History = () => {
 
                     {/*table*/}
                   </table>
+                  {/* PDF */}
                   <div className="row">
                     <div className="col">
                       <PDFDownloadLink
-                        document={
-                          <Document>
-                            <Page size="A4" style={styles.page}>
-                              <View style={styles.section}>
-                                <Text>Section #1</Text>
-                              </View>
-                              <View style={styles.section}>
-                                <Text>Section #2</Text>
-                              </View>
-                            </Page>
-                          </Document>
-                        }
+                        document={<Invoice order={item} />}
                         className="btn btn-primary m-1"
                         fileName="invoice.pdf"
                       >
@@ -111,6 +84,13 @@ const History = () => {
                       </PDFDownloadLink>
                     </div>
                   </div>
+
+                  <div className="row">
+                    <div className="col">
+                      <InvoicePDFJS order={item}/>
+                    </div>
+                  </div>
+
                 </div>
               );
             })}

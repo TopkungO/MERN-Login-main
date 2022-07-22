@@ -54,14 +54,6 @@ const Navbar = () => {
             icon={<DownOutlined />}
             title={user.username}
           >
-            <Menu.Item
-              // icon={<LogoutOutlined />}
-              key="setting:2"
-              // onClick={logout}
-            >
-              <Link to={"/user/index"}>Dasboaed</Link>
-            </Menu.Item>
-
             {user.role === "admin" ? (
               <Menu.Item
                 // icon={<LogoutOutlined />}
@@ -70,7 +62,15 @@ const Navbar = () => {
               >
                 <Link to={"/admin/index"}>DasboaedAdmin</Link>
               </Menu.Item>
-            ) : null}
+            ) : (
+              <Menu.Item
+                // icon={<LogoutOutlined />}
+                key="setting:2"
+                // onClick={logout}
+              >
+                <Link to={"/user/index"}>Dasboaed</Link>
+              </Menu.Item>
+            )}
             <Menu.Item
               icon={<LogoutOutlined />}
               key="setting:1"

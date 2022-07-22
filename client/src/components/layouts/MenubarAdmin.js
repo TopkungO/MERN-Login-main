@@ -20,6 +20,9 @@ const MenubarAdmin = () => {
         <li className="nav-item">
           <Link to="/admin/create-product"> เพิ่มสินค้า</Link>
         </li>
+        <li className="nav-item">
+          <Link to="/admin/orders"> จัดการ oRder</Link>
+        </li>
         
       </ul>
     </nav>
